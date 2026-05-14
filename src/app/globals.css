@@ -1,0 +1,92 @@
+:root {
+  --bg: #eef8ff;
+  --bg-accent:
+    radial-gradient(circle at 12% 18%, rgba(174, 231, 255, 0.92), transparent 22%),
+    radial-gradient(circle at 82% 12%, rgba(196, 243, 232, 0.72), transparent 18%),
+    radial-gradient(circle at 74% 68%, rgba(214, 236, 255, 0.88), transparent 20%),
+    linear-gradient(180deg, #f6fcff 0%, #ecf8ff 48%, #e7f8f6 100%);
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-alt: rgba(246, 251, 255, 0.96);
+  --panel-soft: #eef6ff;
+  --text: #16345f;
+  --muted: #6a88ac;
+  --accent: #1d6dff;
+  --accent-2: #33a6ff;
+  --accent-soft: #eaf2ff;
+  --success: #12b59b;
+  --success-soft: #e6fcf7;
+  --danger: #ff6c7a;
+  --danger-soft: #fff0f3;
+  --warning: #ffb13d;
+  --warning-soft: #fff7e7;
+  --info: #57a8ff;
+  --info-soft: #edf7ff;
+  --border: rgba(90, 153, 219, 0.14);
+  --border-strong: rgba(90, 153, 219, 0.24);
+  --shadow-soft: 0 22px 60px rgba(62, 131, 201, 0.14);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg-accent);
+  color: var(--text);
+  font-family: Aptos, Avenir, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: auto;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(16px);
+}
+
+body::before {
+  top: 84px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 44px;
+  transform: rotate(-18deg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(214, 236, 255, 0.28));
+}
+
+body::after {
+  right: -30px;
+  bottom: 56px;
+  width: 260px;
+  height: 260px;
+  border-radius: 52px;
+  transform: rotate(16deg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(200, 247, 236, 0.22));
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(192, 88, 38, 0.16);
+}
