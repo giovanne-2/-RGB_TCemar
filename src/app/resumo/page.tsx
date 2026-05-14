@@ -90,7 +90,7 @@ export default function ResumoPage() {
           <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: 1, color: 'var(--muted)' }}>
             Ultima leitura
           </div>
-          <div style={{ marginTop: 6, fontSize: 15, fontWeight: 700 }}>{lastModified ?? 'Sem horario disponivel'}</div>
+          {lastModified ? <div style={{ marginTop: 6, fontSize: 15, fontWeight: 700 }}>{lastModified}</div> : null}
           <div style={{ marginTop: 10 }}>
             <PrimaryButton onClick={() => reload()} disabled={loading}>
               Atualizar
