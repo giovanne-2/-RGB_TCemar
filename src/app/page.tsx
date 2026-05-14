@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { BaseTab, Row } from '@/lib/sheets'
-import { exportRowsAsCsv, exportRowsAsPdf } from '@/lib/export'
+import { exportRowsAsCsv, exportVisualPdf } from '@/lib/export'
 import { buildOptions, EMPTY_FILTERS, filterRows, type BaseScope, type Filters, useSheets } from '@/components/useSheets'
 import {
   BaseTabs,
@@ -27,6 +27,7 @@ export default function PlanejadorPage() {
   const [scope, setScope] = useState<BaseScope>('ambas')
   const [tab, setTab] = useState<BaseTab>('litrinho')
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS)
+  const exportRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     load()
@@ -49,7 +50,7 @@ export default function PlanejadorPage() {
   const totalBaseRows = optionRows.length
 
   return (
-    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '20px clamp(14px, 4vw, 28px) 32px' }}>
+    <div ref={exportRef} style={{ maxWidth: 1440, margin: '0 auto', padding: '20px clamp(14px, 4vw, 28px) 32px' }}>
       <div
         style={{
           display: 'flex',
@@ -171,9 +172,12 @@ export default function PlanejadorPage() {
                 Baixar CSV
               </GhostButton>
               <PrimaryButton
-                onClick={() => exportRowsAsPdf(activeRows, scope, scope === 'ambas' ? tab : (scope as BaseTab), filters)}
+                onClick={async () => {
+                  if (!exportRef.current) return
+                  await exportVisualPdf(exportRef.current, scope, scope === 'ambas' ? tab : (scope as BaseTab))
+                }}
                 disabled={!activeRows.length}
-                title="Baixar PDF da tabela filtrada"
+                title="Gerar PDF visual da tela filtrada"
               >
                 Baixar PDF
               </PrimaryButton>
